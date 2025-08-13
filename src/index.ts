@@ -53,7 +53,7 @@ app.get('/', (c) => {
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://kidsland.com.bd', 'https://shop.kidsland.com.bd', 'https://food.kidsland.com.bd'],
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://kidsland.com.bd', 'https://shop.kidsland.com.bd', 'https://food.kidsland.com.bd'],
     allowMethods: ['POST', 'GET', 'PUT', 'DELETE'],
     exposeHeaders: ['*'],
     maxAge: 600,
@@ -234,7 +234,7 @@ const shopPrint = (order: any, printer: typeof escpos.printer) => {
     .size(0, 0)
     .feed(1)
     .align('CT')
-    .barcode(`ORDER-${order.id} @ kidsland`, 80) // Code128 default, 80px height
+    // .barcode(`ORDER-${order.id} @ kidsland`, 80) // Code128 default, 80px height
     .feed(1)
     .text('Thank you for your visit!')
     .text('Please come again')
@@ -310,7 +310,7 @@ const foodPrint = (order: any, printer: typeof escpos.printer) => {
     .size(0, 0)
     .feed(1)
     .align('CT')
-    .barcode(`ORDER-${order.id} @ kidsland`, 80) // Code128 default, height 80
+    // .barcode(`ORDER-${order.id} @ kidsland`, 80) // Code128 default, height 80
     .feed(1)
     .text('Thank you for your visit!')
     .text('Please come again')
@@ -367,7 +367,7 @@ app.get('/api/print', async (c) => {
         // Print first copy
         printReceiptContent(printer, uuid);
         // Print second copy
-        printReceiptContent(printer, uuid);
+        // printReceiptContent(printer, uuid);
 
         printer.close();
       })
